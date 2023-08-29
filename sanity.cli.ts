@@ -1,8 +1,20 @@
-import {defineCliConfig} from 'sanity/cli'
+import { defineCliConfig } from 'sanity/cli'
 
 export default defineCliConfig({
   api: {
-    projectId: 'gnk4kx5s',
-    dataset: 'production'
+    projectId: process.env.SANITY_STUDIO_PROJECT_ID as string,
+    dataset: process.env.SANITY_STUDIO_DATASET as string,
+  },
+  server: {
+    port: 3334
+  },
+  vite: config => {
+    return {
+      ...config,
+      build: {
+        ...config.build,
+        target: 'esnext',
+      }
+    }
   }
 })
