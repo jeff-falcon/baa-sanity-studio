@@ -36,6 +36,72 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'location',
+      type: 'string',
+      title: 'Location',
+    }),
+    defineField({
+      name: 'bio',
+      type: 'array',
+      title: 'Long bio',
+      description: 'Appears below the intro block.',
+      of: [
+        defineArrayMember({
+          type: 'block',
+          styles: [{ title: 'Normal', value: 'normal' }],
+          lists: [],
+          marks: {
+            decorators: [
+              { title: 'Strong', value: 'strong' },
+              { title: 'Emphasis', value: 'em' },
+            ],
+          },
+        }),
+      ],
+    }),
+    defineField({
+      name: 'clients',
+      type: 'text',
+      title: 'Clients and publications',
+      description: 'A single block of text with clients and publications separated by commas.',
+    }),
+    defineField({
+      name: 'links',
+      type: 'array',
+      title: 'Links',
+      of: [
+        defineArrayMember({
+          name: 'link',
+          type: 'object',
+          title: 'Link',
+          preview: {
+            select: {
+              title: 'name',
+              subtitle: 'credit'
+            },
+          },
+          fields: [
+            {
+              name: 'name', type: 'string', title: 'Title', initialValue: 'website', options: {
+                list: [
+                  { title: 'Instagram', value: 'instagram' },
+                  { title: 'Behance', value: 'behance' },
+                  { title: 'LinkedIn', value: 'linkedin' },
+                  { title: 'Facebook', value: 'facebook' },
+                  { title: 'Twitter', value: 'twitter' },
+                  { title: 'Website', value: 'website' },
+                ],
+                direction: 'vertical',
+                layout: 'radio',
+              }
+            },
+            { name: 'url', type: 'url', title: 'Url', hidden: ({ parent }) => parent.name !== 'website' },
+            { name: 'username', type: 'string', title: 'Username', hidden: ({ parent }) => parent.name === 'website' },
+          ],
+        }),
+      ],
+    }),
+    defineField({
       name: 'featured',
       type: 'array',
       title: 'Featured Projects',
