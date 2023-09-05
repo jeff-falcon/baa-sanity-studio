@@ -20,6 +20,12 @@ export default defineType({
       title: 'Artist Name',
     }),
     defineField({
+      name: 'nickname',
+      type: 'string',
+      title: 'Known As',
+      description: 'Used in the footer where it says "Interested in working with [nickname]..."'
+    }),
+    defineField({
       name: 'slug',
       type: 'slug',
       title: 'Slug',
@@ -34,6 +40,19 @@ export default defineType({
             .replace(/[^a-z0-9_-]/g, '')
             .slice(0, 200),
       },
+    }),
+    defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [defineArrayMember({
+        type: 'reference',
+        to: { type: 'skosConcept' },
+        options: {
+          filter: () => schemeFilter({ schemeId: '220fd4' }),
+          disableNew: true,
+        },
+      }),]
     }),
     defineField({
       name: 'location',
@@ -103,16 +122,17 @@ export default defineType({
     }),
     defineField({
       name: 'featured',
-      type: 'array',
-      title: 'Featured Projects',
-      of: [
-        defineArrayMember({
-          name: 'project',
-          title: 'Project',
-          type: 'reference',
-          to: [{ type: 'project' }],
-        }),
-      ],
+      type: 'reference',
+      title: 'Featured Project',
+      description: 'Used on the home page in their artist module.',
+      to: [{ type: 'project' }],
+    }),
+    defineField({
+      name: 'portfolio',
+      type: 'reference',
+      title: 'Portfolio',
+      description: 'Appears at the top above other projects on their artist page.',
+      to: [{ type: 'project' }],
     }),
     defineField({
       name: 'projects',

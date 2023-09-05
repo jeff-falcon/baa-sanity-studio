@@ -73,22 +73,15 @@ export default defineType({
       }),]
     }),
     defineField({
+      name: 'client',
+      type: 'string',
+      title: 'Client',
+    }),
+    defineField({
       name: 'meta_description',
       type: 'string',
       title: 'Meta Description',
       description: 'Used for SEO and social sharing. 1-2 short sentences.',
-    }),
-    defineField({
-      name: 'short_name',
-      type: 'string',
-      title: 'Short Name',
-      description: 'Used under thumbnails in grid views',
-    }),
-    defineField({
-      name: 'client',
-      type: 'string',
-      title: 'Subtitle',
-      description: 'Used under thumbnails in grid views',
     }),
     defineField({
       name: 'image',

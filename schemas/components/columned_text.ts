@@ -25,16 +25,25 @@ export default defineType({
       title: 'Title',
     }),
     defineField({
-      name: 'bordered_title',
-      type: 'boolean',
-      title: 'Border under title',
-      hidden: ({ parent }) => parent.title == '',
+      name: 'layout',
+      type: 'string',
+      title: 'Layout',
+      initialValue: 'even',
+      options: {
+        list: [
+          { title: 'Equal widths', value: 'even' },
+          { title: 'Left column dominant', value: 'left' },
+          { title: 'Right column dominant', value: 'right' },
+        ],
+        layout: 'radio',
+        direction: 'vertical',
+      }
     }),
     defineField({
       name: 'body',
       type: 'array',
       title: 'Body',
-      validation: Rule => Rule.required().min(2).max(4),
+      validation: Rule => Rule.required().min(1).max(2),
       of: [
         defineArrayMember({
           type: 'object',
@@ -60,6 +69,22 @@ export default defineType({
                       { title: 'Emphasis', value: 'em' },
                       { title: 'Code', value: 'code' },
                     ],
+                    annotations: [
+                      {
+                        name: 'link',
+                        type: 'object',
+                        title: 'link',
+                        fields: [
+                          {
+                            name: 'url',
+                            type: 'url',
+                            validation: Rule => Rule.uri({
+                              scheme: ['https', 'mailto']
+                            })
+                          }
+                        ]
+                      }
+                    ]
                   },
                   lists: [
                     { title: 'Bullet', value: 'bullet' },
@@ -72,20 +97,6 @@ export default defineType({
         }),
       ],
     }),
-    defineField({
-      name: 'background_color',
-      type: 'string',
-      title: 'Background color',
-      initialValue: 'transparent',
-      options: {
-        list: [
-          { title: 'Transparent', value: 'transparent' },
-          { title: 'Dark', value: 'dark' },
-          { title: 'Darker', value: 'darker' },
-        ],
-        layout: 'radio',
-        direction: 'horizontal',
-      }
-    }),
+
   ]
 })

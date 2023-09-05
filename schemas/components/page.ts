@@ -38,7 +38,7 @@ export default defineType({
       name: 'hero',
       title: 'Hero',
       type: 'reference',
-      to: [{ type: 'hero' }, { type: 'multi_hero' }],
+      to: [{ type: 'hero' }],
     }),
     defineField({
       name: 'components',
@@ -46,35 +46,11 @@ export default defineType({
       title: 'Components',
       of: [
         defineArrayMember({
-          name: 'projects',
-          title: 'Project Grid',
+          name: 'artists_grid_ref',
+          title: 'Artists Grid',
           type: 'reference',
           to: [
-            { type: 'project_grid' },
-          ],
-        }),
-        defineArrayMember({
-          name: 'project_media_ref',
-          title: 'Single Project Media',
-          type: 'reference',
-          to: [
-            { type: 'project_media' },
-          ],
-        }),
-        /* defineArrayMember({
-          name: 'logo_grid_ref',
-          title: 'Logo Grid',
-          type: 'reference',
-          to: [
-            { type: 'logo_grid' },
-          ],
-        }),
-        defineArrayMember({
-          name: 'text_only_ref',
-          title: 'Text Block',
-          type: 'reference',
-          to: [
-            { type: 'text_only' },
+            { type: 'artists_grid' },
           ],
         }),
         defineArrayMember({
@@ -85,39 +61,8 @@ export default defineType({
             { type: 'columned_text' },
           ],
         }),
-        defineArrayMember({
-          name: 'client_list_ref',
-          title: 'Client List',
-          type: 'reference',
-          to: [
-            { type: 'client_list' },
-          ],
-        }),
-        defineArrayMember({
-          name: 'form_ref',
-          title: 'Form',
-          type: 'reference',
-          to: [
-            { type: 'form' },
-          ],
-        }), */
       ],
     }),
-    /* defineField({
-      name: 'bg_color',
-      type: 'string',
-      title: 'Background Color',
-      initialValue: 'default',
-      options: {
-        list: [
-          { title: 'Default', value: 'default' },
-          { title: 'Rust', value: 'rust' },
-          { title: 'Olive', value: 'olive' },
-        ],
-        direction: 'vertical',
-        layout: 'radio',
-      }
-    }), */
     defineField({
       name: 'bg_color',
       type: 'simplerColor',
@@ -125,20 +70,11 @@ export default defineType({
       options: {
         enableAlpha: false,
         colorList: [
-          { label: 'Dark Gray', value: '#262626' },
-          { label: 'Rust', value: '#6d3434' },
-          { label: 'Olive', value: '#3f4239' },
-          { label: 'Cream', value: '#EFF4E3' },
-          { label: 'Light Goldenrod', value: '#E9F1CF' },
+          { label: 'Dark', value: '#262626' },
+          { label: 'Light', value: '#E6E4DF' },
           { label: 'Custom...', value: 'custom' },
         ]
       }
-    }),
-    defineField({
-      name: 'footer_contact',
-      type: 'boolean',
-      title: 'Show Contact in Footer',
-      initialValue: true,
     }),
   ],
 })
