@@ -8,10 +8,9 @@ import { BespokeLogo } from './ui/BespokeLogo'
 import { simplerColorInput } from 'sanity-plugin-simpler-color-input'
 import { taxonomyManager } from 'sanity-plugin-taxonomy-manager'
 
-
 const { theme } = (await import(
   // @ts-expect-error -- TODO setup themer.d.ts to get correct typings
-  'https://themer.sanity.build/api/hues?default=60929e&primary=d8172e&transparent=60929e&positive=43d675;300&caution=fbd024;200&lightest=fcfdfd&darkest=0d1415'
+  'https://themer.sanity.build/api/hues?default=bdbcbb;300&primary=cec9b5;300&transparent=bdbcbb;300&positive=43d675;300&caution=fba524;300&lightest=fafafa&darkest=111'
 )) as { theme: import('sanity').StudioTheme }
 
 export default defineConfig({

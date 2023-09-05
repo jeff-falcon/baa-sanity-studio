@@ -1,4 +1,4 @@
-import { ThLargeIcon, UserIcon } from '@sanity/icons'
+import { UserIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 import { schemeFilter } from 'sanity-plugin-taxonomy-manager'
 
@@ -96,8 +96,16 @@ export default defineType({
           preview: {
             select: {
               title: 'name',
-              subtitle: 'credit'
+              username: 'username',
+              url: 'username'
             },
+            prepare(value) {
+              const { title, username, url } = value as { title: string, username: string, url: string }
+              return {
+                title,
+                subtitle: username && title !== 'website' ? `@${username}` : url,
+              }
+            }
           },
           fields: [
             {
