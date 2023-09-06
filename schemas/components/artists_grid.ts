@@ -27,9 +27,30 @@ export default defineType({
       title: 'Name',
     }),
     defineField({
+      name: 'show_all',
+      type: 'boolean',
+      title: 'Show all artists',
+    }),
+    defineField({
+      name: 'sorting',
+      type: 'string',
+      title: 'Sorting',
+      initialValue: 'alpha',
+      hidden: ({ parent }: any) => parent?.show_all !== true,
+      options: {
+        list: [
+          { title: 'Alphabetical (A-Z)', value: 'alpha' },
+          { title: 'Most recent (modified date)', value: 'date' },
+        ],
+        layout: 'radio',
+        direction: 'horizontal',
+      }
+    }),
+    defineField({
       name: 'artists',
       type: 'array',
       title: 'Artists',
+      hidden: ({ parent }: any) => parent?.show_all !== false,
       of: [
         defineArrayMember({
           name: 'artist',

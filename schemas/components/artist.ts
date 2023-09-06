@@ -130,10 +130,17 @@ export default defineType({
     }),
     defineField({
       name: 'featured',
-      type: 'reference',
-      title: 'Featured Project',
+      type: 'array',
+      title: 'Featured Media',
       description: 'Used on the home page in their artist module.',
-      to: [{ type: 'project' }],
+      of: [
+        defineArrayMember({
+          name: 'project_media',
+          title: 'Project Media',
+          type: 'reference',
+          to: [{ type: 'project_media' }],
+        }),
+      ],
     }),
     defineField({
       name: 'portfolio',
