@@ -75,7 +75,7 @@ export default defineType({
     defineField({
       name: 'client',
       type: 'string',
-      title: 'Client',
+      title: 'Subtitle',
     }),
     defineField({
       name: 'meta_description',
