@@ -1,4 +1,4 @@
-import { UserIcon } from '@sanity/icons'
+import { EarthGlobeIcon, UserIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 import { schemeFilter } from 'sanity-plugin-taxonomy-manager'
 
@@ -97,13 +97,15 @@ export default defineType({
             select: {
               title: 'name',
               username: 'username',
-              url: 'username'
+              url: 'url'
             },
             prepare(value) {
               const { title, username, url } = value as { title: string, username: string, url: string }
+              const isSocial = username && title !== 'website'
               return {
                 title,
-                subtitle: username && title !== 'website' ? `@${username}` : url,
+                subtitle: isSocial ? `@${username}` : url,
+                media: isSocial ? UserIcon : EarthGlobeIcon
               }
             }
           },
