@@ -1,6 +1,8 @@
-import { EarthGlobeIcon, UserIcon } from '@sanity/icons'
+import { DashboardIcon, EarthGlobeIcon, SplitVerticalIcon, UserIcon } from '@sanity/icons'
+import React from 'react'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 import { schemeFilter } from 'sanity-plugin-taxonomy-manager'
+import { makeCloudinaryThumb } from '../../lib/util'
 
 // schemas/project.ts
 export default defineType({
@@ -158,9 +160,106 @@ export default defineType({
       of: [
         defineArrayMember({
           name: 'project',
-          title: 'Project',
+          title: 'Project Single',
           type: 'reference',
           to: [{ type: 'project' }],
+        }),
+        defineArrayMember({
+          name: 'project_pair',
+          type: 'object',
+          title: 'Project Pair',
+          icon: SplitVerticalIcon,
+          preview: {
+            select: {
+              titleLeft: 'left.name',
+              titleRight: 'right.name',
+              imageUrl: 'left.image.secure_url',
+            },
+            prepare({ titleLeft, titleRight, imageUrl }: any) {
+              return {
+                title: 'Project Pair',
+                subtitle: `${titleLeft} + ${titleRight}`,
+                media: React.createElement('img', { src: makeCloudinaryThumb(imageUrl) })
+              }
+            },
+          },
+          fields: [
+            defineField({
+              name: 'left',
+              type: 'reference',
+              weak: true,
+              to: [
+                {
+                  type: 'project',
+                },
+              ],
+            }),
+            defineField({
+              name: 'right',
+              weak: true,
+              type: 'reference',
+              to: [{ type: 'project' }],
+            }),
+          ],
+        }),
+        defineArrayMember({
+          name: 'project_trio',
+          type: 'object',
+          title: 'Project Trio',
+          icon: DashboardIcon,
+          preview: {
+            select: {
+              title1: 'top.name',
+              title2: 'bottom.name',
+              title3: 'side.name',
+              imageUrl: 'top.image.secure_url',
+            },
+            prepare({ title1, title2, title3, imageUrl }: any) {
+              return {
+                title: 'Project Trio',
+                subtitle: `${title1} + ${title2} + ${title3}`,
+                media: React.createElement('img', { src: makeCloudinaryThumb(imageUrl) })
+              }
+            },
+          },
+          fields: [
+            defineField({
+              name: 'top',
+              type: 'reference',
+              weak: true,
+              title: 'Small top project',
+              to: [{ type: 'project' }],
+            }),
+            defineField({
+              name: 'bottom',
+              weak: true,
+              title: 'Small bottom project',
+              type: 'reference',
+              to: [{ type: 'project' }],
+            }),
+            defineField({
+              name: 'side',
+              weak: true,
+              title: 'Large project',
+              type: 'reference',
+              to: [{ type: 'project' }],
+            }),
+            defineField({
+              name: 'align',
+              type: 'string',
+              title: 'Alignment',
+              description: 'Aligns the large project to the left or right',
+              initialValue: 'left',
+              options: {
+                list: [
+                  { title: 'Left', value: 'left' },
+                  { title: 'Right', value: 'right' },
+                ],
+                layout: 'radio',
+                direction: 'horizontal',
+              }
+            })
+          ],
         }),
       ],
     }),
