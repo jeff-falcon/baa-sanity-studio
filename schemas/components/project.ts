@@ -1,6 +1,6 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 import { makeCloudinaryThumb } from '../../lib/util'
-import { PresentationIcon } from '@sanity/icons'
+import { DashboardIcon, ImagesIcon, PresentationIcon } from '@sanity/icons'
 import { schemeFilter } from 'sanity-plugin-taxonomy-manager'
 import React from 'react'
 
@@ -191,6 +191,7 @@ export default defineType({
         defineArrayMember({
           name: 'item_pair',
           type: 'object',
+          icon: ImagesIcon,
           title: 'Image Pair',
           preview: {
             select: {
@@ -200,8 +201,8 @@ export default defineType({
             },
             prepare({ titleLeft, titleRight, imageUrl }: any) {
               return {
-                title: `${titleLeft} + ${titleRight}`,
-                subtitle: 'Image Pair',
+                title: 'Image Pair',
+                subtitle: `${titleLeft} + ${titleRight}`,
                 media: React.createElement('img', { src: makeCloudinaryThumb(imageUrl) })
               }
             },
@@ -223,6 +224,62 @@ export default defineType({
               type: 'reference',
               to: [{ type: 'project_media' }],
             }),
+          ],
+        }),
+        defineArrayMember({
+          name: 'item_trio',
+          type: 'object',
+          title: 'Image Trio',
+          icon: DashboardIcon,
+          preview: {
+            select: {
+              title1: 'top.name',
+              title2: 'bottom.name',
+              title3: 'side.name',
+              imageUrl: 'top.image.secure_url',
+            },
+            prepare({ title1, title2, title3, imageUrl }: any) {
+              return {
+                title: 'Image Trio',
+                subtitle: `${title1} + ${title2} + ${title3}`,
+                media: React.createElement('img', { src: makeCloudinaryThumb(imageUrl) })
+              }
+            },
+          },
+          fields: [
+            defineField({
+              name: 'top',
+              type: 'reference',
+              weak: true,
+              to: [{ type: 'project_media' }],
+            }),
+            defineField({
+              name: 'bottom',
+              weak: true,
+              type: 'reference',
+              to: [{ type: 'project_media' }],
+            }),
+            defineField({
+              name: 'side',
+              weak: true,
+              type: 'reference',
+              to: [{ type: 'project_media' }],
+            }),
+            defineField({
+              name: 'align',
+              type: 'string',
+              title: 'Alignment',
+              description: 'Aligns the large image to the left or right',
+              initialValue: 'left',
+              options: {
+                list: [
+                  { title: 'Left', value: 'left' },
+                  { title: 'Right', value: 'right' },
+                ],
+                layout: 'radio',
+                direction: 'horizontal',
+              }
+            })
           ],
         }),
       ],
