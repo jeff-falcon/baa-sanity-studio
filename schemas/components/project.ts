@@ -180,6 +180,7 @@ export default defineType({
       name: 'media',
       type: 'array',
       title: 'Media',
+      description: 'Note: Video Players should only be used in Single Item blocks.',
       of: [
         defineArrayMember({
           name: 'item',
