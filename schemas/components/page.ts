@@ -64,6 +64,12 @@ export default defineType({
       ],
     }),
     defineField({
+      name: 'footer_has_contact_info',
+      title: 'Footer has contact info',
+      type: 'boolean',
+      initialValue: true,
+    }),
+    defineField({
       name: 'bg_color',
       type: 'simplerColor',
       title: 'Background Color',
