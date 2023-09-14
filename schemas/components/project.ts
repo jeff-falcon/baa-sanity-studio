@@ -302,6 +302,13 @@ export default defineType({
       }
     }),
     defineField({
+      name: 'hidden_from_artist_page',
+      type: 'boolean',
+      title: 'Hide from artist page',
+      description: 'Enabling this will remove the project from the artist page. You should still add it to the artist’s projects list however.',
+      initialValue: false,
+    }),
+    /* defineField({
       name: 'show_related_projects',
       type: 'boolean',
       title: 'Show Related Projects',
@@ -312,7 +319,6 @@ export default defineType({
       name: 'related_projects_bg_color',
       type: 'simplerColor',
       title: 'Related Projects Section Background Color',
-      description: 'Show a grid of related projects at the bottom of the page.',
       options: {
         enableAlpha: true,
         colorList: [
@@ -324,6 +330,6 @@ export default defineType({
           { label: 'Custom...', value: 'custom' },
         ]
       }
-    }),
+    }), */
   ],
 })
