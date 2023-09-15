@@ -1,6 +1,6 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 import timezones, { TimeZone } from 'timezones-list';
-import { CogIcon, EarthGlobeIcon } from '@sanity/icons';
+import { CogIcon } from '@sanity/icons';
 import React from 'react';
 
 const timezoneOptions = timezones.map((tz: TimeZone) => { return { title: tz.label, value: tz.tzCode } })

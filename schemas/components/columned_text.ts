@@ -62,7 +62,10 @@ export default defineType({
               of: [
                 defineArrayMember({
                   type: 'block',
-                  styles: [{ title: 'Normal', value: 'normal' }],
+                  styles: [
+                    { title: 'Heading', value: 'h3' },
+                    { title: 'Normal', value: 'normal' },
+                  ],
                   marks: {
                     decorators: [
                       { title: 'Strong', value: 'strong' },
