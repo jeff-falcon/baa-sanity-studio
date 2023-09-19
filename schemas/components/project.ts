@@ -76,6 +76,7 @@ export default defineType({
       name: 'client',
       type: 'string',
       title: 'Subtitle',
+      description: 'Appears on the project page below the title, unless tags are used.',
     }),
     defineField({
       name: 'meta_description',
