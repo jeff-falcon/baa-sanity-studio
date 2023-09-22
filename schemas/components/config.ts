@@ -58,6 +58,45 @@ export default defineType({
       ],
     }),
     defineField({
+      name: 'artist_contact_info',
+      type: 'array',
+      title: 'Artist Page Contact info',
+      description: 'Contact info to display in the footer on an artist page',
+      of: [
+        defineArrayMember({
+          type: 'block',
+          styles: [{ title: 'Normal', value: 'normal' }],
+          marks: {
+            decorators: [
+              { title: 'Strong', value: 'strong' },
+              { title: 'Emphasis', value: 'em' },
+              { title: 'Code', value: 'code' },
+            ],
+            annotations: [
+              {
+                name: 'link',
+                type: 'object',
+                title: 'link',
+                fields: [
+                  {
+                    name: 'url',
+                    type: 'url',
+                    validation: Rule => Rule.uri({
+                      scheme: ['https', 'mailto']
+                    })
+                  }
+                ]
+              }
+            ]
+          },
+          lists: [
+            { title: 'Bullet', value: 'bullet' },
+            { title: 'Numbered', value: 'number' }
+          ]
+        })
+      ],
+    }),
+    defineField({
       name: 'socials_group',
       type: 'object',
       title: 'Socials',
