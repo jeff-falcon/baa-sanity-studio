@@ -41,6 +41,13 @@ export default defineType({
       initialValue: 'Explore our talent',
     }),
     defineField({
+      name: 'still_duration',
+      type: 'number',
+      title: 'Still image duration',
+      description: 'in seconds',
+      validation: Rule => Rule.positive().min(1).max(10),
+    }),
+    defineField({
       name: 'artists',
       type: 'array',
       title: 'Artists',
