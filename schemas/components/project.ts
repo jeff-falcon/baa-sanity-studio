@@ -287,6 +287,20 @@ export default defineType({
       ],
     }),
     defineField({
+      name: 'type',
+      type: 'string',
+      title: 'Project Type',
+      options: {
+        list: [
+          { title: 'Project', value: 'project' },
+          { title: 'Portfolio', value: 'portfolio' },
+        ],
+        direction: 'horizontal',
+        layout: 'radio'
+      },
+      initialValue: 'project',
+    }),
+    defineField({
       name: 'hidden_from_artist_page',
       type: 'boolean',
       title: 'Hide from artist page',
