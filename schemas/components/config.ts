@@ -151,6 +151,19 @@ export default defineType({
         }),
       ]
     }),
-
+    defineField({
+      name: 'artists',
+      type: 'array',
+      title: 'Artists',
+      description: 'Artists to display in the site navigation',
+      of: [
+        defineArrayMember({
+          name: 'artist',
+          title: 'Artist',
+          type: 'reference',
+          to: [{ type: 'artist' }],
+        }),
+      ],
+    }),
   ],
 })
