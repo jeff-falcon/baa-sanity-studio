@@ -97,8 +97,8 @@ export default defineType({
     defineField({
       name: 'fill_container',
       type: 'boolean',
-      title: 'Fill container inside Pair or Trio',
-      description: 'Fills the video player to the container when inside a Pair or Trio.',
+      title: 'Use aspect ratio from image',
+      description: 'Forces the video player to the use the thumbnail image aspect ratio. Useful inside a Pair or Trio when using 9:16 video.',
       initialValue: false,
       hidden: ({ parent }: FieldParams) => parent.kind !== 'video-player',
     }),
