@@ -94,5 +94,13 @@ export default defineType({
       initialValue: false,
       hidden: ({ parent }: FieldParams) => parent.kind !== 'video-player',
     }),
+    defineField({
+      name: 'fill_container',
+      type: 'boolean',
+      title: 'Fill container inside Pair or Trio',
+      description: 'Fills the video player to the container when inside a Pair or Trio.',
+      initialValue: false,
+      hidden: ({ parent }: FieldParams) => parent.kind !== 'video-player',
+    }),
   ],
 })
