@@ -6,6 +6,7 @@ import ColumnedText from './components/columned_text'
 import Config from './components/config'
 import Artist from './components/artist'
 import ArtistsGrid from './components/artists_grid'
+import LatestProjects from './components/latest_projects'
 
 export const schemaTypes = [
   Config,
@@ -14,6 +15,7 @@ export const schemaTypes = [
   ArtistsGrid,
   Project,
   ProjectMedia,
+  LatestProjects,
   Hero,
   ColumnedText,
 ];

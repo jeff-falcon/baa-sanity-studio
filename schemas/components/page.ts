@@ -54,6 +54,14 @@ export default defineType({
           ],
         }),
         defineArrayMember({
+          name: 'latest_projects_ref',
+          title: 'Latest Projects',
+          type: 'reference',
+          to: [
+            { type: 'latest_projects' },
+          ],
+        }),
+        defineArrayMember({
           name: 'columned_text_ref',
           title: 'Columned Text',
           type: 'reference',
