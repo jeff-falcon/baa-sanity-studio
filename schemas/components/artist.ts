@@ -1,8 +1,8 @@
-import { DashboardIcon, EarthGlobeIcon, SplitVerticalIcon, UserIcon } from '@sanity/icons'
+import {DashboardIcon, EarthGlobeIcon, SplitVerticalIcon, UserIcon} from '@sanity/icons'
 import React from 'react'
-import { defineArrayMember, defineField, defineType } from 'sanity'
-import { schemeFilter } from 'sanity-plugin-taxonomy-manager'
-import { makeCloudinaryThumb } from '../../lib/util'
+import {defineArrayMember, defineField, defineType} from 'sanity'
+import {schemeFilter} from 'sanity-plugin-taxonomy-manager'
+import {makeCloudinaryThumb} from '../../lib/util'
 
 // schemas/project.ts
 export default defineType({
@@ -25,7 +25,7 @@ export default defineType({
       name: 'nickname',
       type: 'string',
       title: 'Known As',
-      description: 'Used in the footer where it says "Interested in working with [nickname]..."'
+      description: 'Used in the footer where it says "Interested in working with [nickname]..."',
     }),
     defineField({
       name: 'slug',
@@ -47,14 +47,16 @@ export default defineType({
       name: 'tags',
       title: 'Tags',
       type: 'array',
-      of: [defineArrayMember({
-        type: 'reference',
-        to: { type: 'skosConcept' },
-        options: {
-          filter: () => schemeFilter({ schemeId: '220fd4' }),
-          disableNew: true,
-        },
-      }),]
+      of: [
+        defineArrayMember({
+          type: 'reference',
+          to: {type: 'skosConcept'},
+          options: {
+            filter: () => schemeFilter({schemeId: '220fd4'}),
+            disableNew: true,
+          },
+        }),
+      ],
     }),
     defineField({
       name: 'location',
@@ -69,12 +71,12 @@ export default defineType({
       of: [
         defineArrayMember({
           type: 'block',
-          styles: [{ title: 'Normal', value: 'normal' }],
+          styles: [{title: 'Normal', value: 'normal'}],
           lists: [],
           marks: {
             decorators: [
-              { title: 'Strong', value: 'strong' },
-              { title: 'Emphasis', value: 'em' },
+              {title: 'Strong', value: 'strong'},
+              {title: 'Emphasis', value: 'em'},
             ],
           },
         }),
@@ -99,35 +101,49 @@ export default defineType({
             select: {
               title: 'name',
               username: 'username',
-              url: 'url'
+              url: 'url',
             },
             prepare(value) {
-              const { title, username, url } = value as { title: string, username: string, url: string }
+              const {title, username, url} = value as {title: string; username: string; url: string}
               const isSocial = username && title !== 'website'
               return {
                 title,
                 subtitle: isSocial ? `@${username}` : url,
-                media: isSocial ? UserIcon : EarthGlobeIcon
+                media: isSocial ? UserIcon : EarthGlobeIcon,
               }
-            }
+            },
           },
           fields: [
             {
-              name: 'name', type: 'string', title: 'Title', initialValue: 'website', options: {
+              name: 'name',
+              type: 'string',
+              title: 'Title',
+              initialValue: 'website',
+              options: {
                 list: [
-                  { title: 'Instagram', value: 'instagram' },
-                  { title: 'Behance', value: 'behance' },
-                  { title: 'LinkedIn', value: 'linkedin' },
-                  { title: 'Facebook', value: 'facebook' },
-                  { title: 'Twitter', value: 'twitter' },
-                  { title: 'Website', value: 'website' },
+                  {title: 'Instagram', value: 'instagram'},
+                  {title: 'Behance', value: 'behance'},
+                  {title: 'LinkedIn', value: 'linkedin'},
+                  {title: 'Facebook', value: 'facebook'},
+                  {title: 'Twitter', value: 'twitter'},
+                  {title: 'Website', value: 'website'},
                 ],
                 direction: 'vertical',
                 layout: 'radio',
-              }
+              },
             },
-            { name: 'url', type: 'url', title: 'Url', hidden: ({ parent }) => parent.name !== 'website' },
-            { name: 'username', type: 'string', title: 'Username', hidden: ({ parent }) => parent.name === 'website' },
+            {
+              name: 'url',
+              type: 'url',
+              title: 'Url',
+              hidden: ({parent}) => parent.name !== 'website',
+            },
+            {
+              name: 'username',
+              type: 'string',
+              title: 'Username',
+              hidden: ({parent}) => parent.name === 'website',
+            },
           ],
         }),
       ],
@@ -142,7 +158,7 @@ export default defineType({
           name: 'project_media',
           title: 'Project Media',
           type: 'reference',
-          to: [{ type: 'project_media' }],
+          to: [{type: 'project_media'}],
         }),
       ],
     }),
@@ -151,7 +167,7 @@ export default defineType({
       type: 'reference',
       title: 'Portfolio',
       description: 'Appears at the top above other projects on their artist page.',
-      to: [{ type: 'project' }],
+      to: [{type: 'project'}],
     }),
     defineField({
       name: 'projects',
@@ -162,7 +178,7 @@ export default defineType({
           name: 'project',
           title: 'Project Single',
           type: 'reference',
-          to: [{ type: 'project' }],
+          to: [{type: 'project'}],
         }),
         defineArrayMember({
           name: 'project_pair',
@@ -171,15 +187,15 @@ export default defineType({
           icon: SplitVerticalIcon,
           preview: {
             select: {
-              titleLeft: 'left.name',
-              titleRight: 'right.name',
+              titleLeft: 'left.title',
+              titleRight: 'right.title',
               imageUrl: 'left.image.secure_url',
             },
-            prepare({ titleLeft, titleRight, imageUrl }: any) {
+            prepare({titleLeft, titleRight, imageUrl}: any) {
               return {
                 title: 'Project Pair',
                 subtitle: `${titleLeft} + ${titleRight}`,
-                media: React.createElement('img', { src: makeCloudinaryThumb(imageUrl) })
+                media: React.createElement('img', {src: makeCloudinaryThumb(imageUrl)}),
               }
             },
           },
@@ -198,7 +214,7 @@ export default defineType({
               name: 'right',
               weak: true,
               type: 'reference',
-              to: [{ type: 'project' }],
+              to: [{type: 'project'}],
             }),
           ],
         }),
@@ -209,16 +225,16 @@ export default defineType({
           icon: DashboardIcon,
           preview: {
             select: {
-              title1: 'top.name',
-              title2: 'bottom.name',
-              title3: 'side.name',
+              title1: 'top.title',
+              title2: 'bottom.title',
+              title3: 'side.title',
               imageUrl: 'top.image.secure_url',
             },
-            prepare({ title1, title2, title3, imageUrl }: any) {
+            prepare({title1, title2, title3, imageUrl}: any) {
               return {
                 title: 'Project Trio',
                 subtitle: `${title1} + ${title2} + ${title3}`,
-                media: React.createElement('img', { src: makeCloudinaryThumb(imageUrl) })
+                media: React.createElement('img', {src: makeCloudinaryThumb(imageUrl)}),
               }
             },
           },
@@ -228,21 +244,21 @@ export default defineType({
               type: 'reference',
               weak: true,
               title: 'Small top project',
-              to: [{ type: 'project' }],
+              to: [{type: 'project'}],
             }),
             defineField({
               name: 'bottom',
               weak: true,
               title: 'Small bottom project',
               type: 'reference',
-              to: [{ type: 'project' }],
+              to: [{type: 'project'}],
             }),
             defineField({
               name: 'side',
               weak: true,
               title: 'Large project',
               type: 'reference',
-              to: [{ type: 'project' }],
+              to: [{type: 'project'}],
             }),
             defineField({
               name: 'align',
@@ -252,13 +268,13 @@ export default defineType({
               initialValue: 'left',
               options: {
                 list: [
-                  { title: 'Left', value: 'left' },
-                  { title: 'Right', value: 'right' },
+                  {title: 'Left', value: 'left'},
+                  {title: 'Right', value: 'right'},
                 ],
                 layout: 'radio',
                 direction: 'horizontal',
-              }
-            })
+              },
+            }),
           ],
         }),
       ],
