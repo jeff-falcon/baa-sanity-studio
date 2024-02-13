@@ -1,5 +1,5 @@
-import { defineArrayMember, defineField, defineType } from 'sanity'
-import { DocumentsIcon } from '@sanity/icons'
+import {defineArrayMember, defineField, defineType} from 'sanity'
+import {DocumentsIcon} from '@sanity/icons'
 // schemas/project.ts
 export default defineType({
   name: 'page',
@@ -38,7 +38,7 @@ export default defineType({
       name: 'hero',
       title: 'Hero',
       type: 'reference',
-      to: [{ type: 'hero' }],
+      to: [{type: 'hero'}],
     }),
     defineField({
       name: 'components',
@@ -49,25 +49,19 @@ export default defineType({
           name: 'artists_grid_ref',
           title: 'Artists Grid',
           type: 'reference',
-          to: [
-            { type: 'artists_grid' },
-          ],
+          to: [{type: 'artists_grid'}],
         }),
         defineArrayMember({
           name: 'latest_projects_ref',
           title: 'Latest Projects',
           type: 'reference',
-          to: [
-            { type: 'latest_projects' },
-          ],
+          to: [{type: 'latest_projects'}],
         }),
         defineArrayMember({
           name: 'columned_text_ref',
           title: 'Columned Text',
           type: 'reference',
-          to: [
-            { type: 'columned_text' },
-          ],
+          to: [{type: 'columned_text'}],
         }),
       ],
     }),
@@ -78,17 +72,23 @@ export default defineType({
       initialValue: true,
     }),
     defineField({
+      name: 'footer_has_contact_newsletter',
+      title: 'Footer has newsletter form',
+      type: 'boolean',
+      initialValue: true,
+    }),
+    defineField({
       name: 'bg_color',
       type: 'simplerColor',
       title: 'Background Color',
       options: {
         enableAlpha: false,
         colorList: [
-          { label: 'Dark', value: '#262626' },
-          { label: 'Light', value: '#E6E4DF' },
-          { label: 'Custom...', value: 'custom' },
-        ]
-      }
+          {label: 'Dark', value: '#262626'},
+          {label: 'Light', value: '#E6E4DF'},
+          {label: 'Custom...', value: 'custom'},
+        ],
+      },
     }),
   ],
 })

@@ -1,9 +1,11 @@
-import { defineArrayMember, defineField, defineType } from 'sanity'
-import timezones, { TimeZone } from 'timezones-list';
-import { CogIcon } from '@sanity/icons';
-import React from 'react';
+import {defineArrayMember, defineField, defineType} from 'sanity'
+import timezones, {TimeZone} from 'timezones-list'
+import {CogIcon} from '@sanity/icons'
+import React from 'react'
 
-const timezoneOptions = timezones.map((tz: TimeZone) => { return { title: tz.label, value: tz.tzCode } })
+const timezoneOptions = timezones.map((tz: TimeZone) => {
+  return {title: tz.label, value: tz.tzCode}
+})
 timezoneOptions.sort((a, b) => a.title.localeCompare(b.title))
 
 // schemas/config.ts
@@ -26,12 +28,12 @@ export default defineType({
       of: [
         defineArrayMember({
           type: 'block',
-          styles: [{ title: 'Normal', value: 'normal' }],
+          styles: [{title: 'Normal', value: 'normal'}],
           marks: {
             decorators: [
-              { title: 'Strong', value: 'strong' },
-              { title: 'Emphasis', value: 'em' },
-              { title: 'Code', value: 'code' },
+              {title: 'Strong', value: 'strong'},
+              {title: 'Emphasis', value: 'em'},
+              {title: 'Code', value: 'code'},
             ],
             annotations: [
               {
@@ -42,19 +44,20 @@ export default defineType({
                   {
                     name: 'url',
                     type: 'url',
-                    validation: Rule => Rule.uri({
-                      scheme: ['https', 'mailto']
-                    })
-                  }
-                ]
-              }
-            ]
+                    validation: (Rule) =>
+                      Rule.uri({
+                        scheme: ['https', 'mailto'],
+                      }),
+                  },
+                ],
+              },
+            ],
           },
           lists: [
-            { title: 'Bullet', value: 'bullet' },
-            { title: 'Numbered', value: 'number' }
-          ]
-        })
+            {title: 'Bullet', value: 'bullet'},
+            {title: 'Numbered', value: 'number'},
+          ],
+        }),
       ],
     }),
     defineField({
@@ -65,12 +68,12 @@ export default defineType({
       of: [
         defineArrayMember({
           type: 'block',
-          styles: [{ title: 'Normal', value: 'normal' }],
+          styles: [{title: 'Normal', value: 'normal'}],
           marks: {
             decorators: [
-              { title: 'Strong', value: 'strong' },
-              { title: 'Emphasis', value: 'em' },
-              { title: 'Code', value: 'code' },
+              {title: 'Strong', value: 'strong'},
+              {title: 'Emphasis', value: 'em'},
+              {title: 'Code', value: 'code'},
             ],
             annotations: [
               {
@@ -81,19 +84,20 @@ export default defineType({
                   {
                     name: 'url',
                     type: 'url',
-                    validation: Rule => Rule.uri({
-                      scheme: ['https', 'mailto']
-                    })
-                  }
-                ]
-              }
-            ]
+                    validation: (Rule) =>
+                      Rule.uri({
+                        scheme: ['https', 'mailto'],
+                      }),
+                  },
+                ],
+              },
+            ],
           },
           lists: [
-            { title: 'Bullet', value: 'bullet' },
-            { title: 'Numbered', value: 'number' }
-          ]
-        })
+            {title: 'Bullet', value: 'bullet'},
+            {title: 'Numbered', value: 'number'},
+          ],
+        }),
       ],
     }),
     defineField({
@@ -114,16 +118,19 @@ export default defineType({
                 select: {
                   title: 'name',
                   subtitle: 'url',
-                  imageUrl: 'icon.asset.url'
+                  imageUrl: 'icon.asset.url',
                 },
-                prepare({ title, subtitle, imageUrl }: any) {
-                  const img = React.createElement('img', { src: imageUrl, style: { backgroundColor: 'black' } })
+                prepare({title, subtitle, imageUrl}: any) {
+                  const img = React.createElement('img', {
+                    src: imageUrl,
+                    style: {backgroundColor: 'black'},
+                  })
                   return {
                     title,
                     subtitle,
-                    media: img
+                    media: img,
                   }
-                }
+                },
               },
               fields: [
                 defineField({
@@ -143,13 +150,13 @@ export default defineType({
                   description: '1:1 aspect ratio, white fills or strokes, transparent background',
                   options: {
                     accept: 'image/svg+xml',
-                  }
+                  },
                 }),
               ],
-            })
-          ]
+            }),
+          ],
         }),
-      ]
+      ],
     }),
     defineField({
       name: 'artists',
@@ -161,7 +168,7 @@ export default defineType({
           name: 'artist',
           title: 'Artist',
           type: 'reference',
-          to: [{ type: 'artist' }],
+          to: [{type: 'artist'}],
         }),
       ],
     }),
