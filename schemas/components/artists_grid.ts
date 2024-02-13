@@ -1,5 +1,5 @@
-import { ThLargeIcon } from '@sanity/icons'
-import { defineArrayMember, defineField, defineType } from 'sanity'
+import {ThLargeIcon} from '@sanity/icons'
+import {defineArrayMember, defineField, defineType} from 'sanity'
 
 // schemas/project.ts
 export default defineType({
@@ -13,7 +13,7 @@ export default defineType({
       subtitle: 'title',
     },
     prepare(value, viewOptions) {
-      const { title, subtitle } = value as { title: string, subtitle: string }
+      const {title, subtitle} = value as {title: string; subtitle: string}
       return {
         title,
         subtitle: subtitle ? `Section title: ${subtitle}` : '',
@@ -36,29 +36,42 @@ export default defineType({
       type: 'string',
       title: 'Sorting',
       initialValue: 'alpha',
-      hidden: ({ parent }: any) => parent?.show_all !== true,
+      hidden: ({parent}: any) => parent?.show_all !== true,
       options: {
         list: [
-          { title: 'Alphabetical (A-Z)', value: 'alpha' },
-          { title: 'Most recent (modified date)', value: 'date' },
+          {title: 'Alphabetical (A-Z)', value: 'alpha'},
+          {title: 'Most recent (modified date)', value: 'date'},
         ],
         layout: 'radio',
         direction: 'horizontal',
-      }
+      },
     }),
     defineField({
       name: 'artists',
       type: 'array',
       title: 'Artists',
-      hidden: ({ parent }: any) => parent?.show_all !== false,
+      hidden: ({parent}: any) => parent?.show_all !== false,
       of: [
         defineArrayMember({
           name: 'artist',
           title: 'Artist',
           type: 'reference',
-          to: [{ type: 'artist' }],
+          to: [{type: 'artist'}],
         }),
       ],
+    }),
+    defineField({
+      name: 'empty_color',
+      type: 'simplerColor',
+      title: 'Empty Item Color',
+      options: {
+        enableAlpha: false,
+        colorList: [
+          {label: 'Dark', value: '#262626'},
+          {label: 'Light', value: '#E6E4DF'},
+          {label: 'Custom...', value: 'custom'},
+        ],
+      },
     }),
   ],
 })

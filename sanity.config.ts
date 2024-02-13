@@ -33,7 +33,7 @@ export default defineConfig({
   theme,
   document: {
     productionUrl: async (prev, context) => {
-      const domain = isDev ? 'http://localhost:5174' : 'https://baa-website.vercel.app'
+      const domain = isDev ? 'http://localhost:5174' : 'https://baa-global.com'
       const { getClient, document } = context
       const client = getClient({ apiVersion: '2023-05-31' })
       if (document._type === 'page') {
@@ -44,10 +44,16 @@ export default defineConfig({
         return `${domain}/${slug}`
       } else if (document._type === 'artist') {
         const slug = await client.fetch(
-          `*[_type == 'project' && _id == $postId][0].slug.current`,
+          `*[_type == 'artist' && _id == $postId][0].slug.current`,
           { postId: document._id }
         )
         return `${domain}/artists/${slug}/`
+      } else if (document._type === 'project') {
+        const slug = await client.fetch(
+          `*[_type == 'project' && _id == $postId][0].slug.current`,
+          { postId: document._id }
+        )
+        return `${domain}/projects/${slug}/`
       }
       return prev
     },
